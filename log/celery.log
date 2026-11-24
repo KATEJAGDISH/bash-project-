@@ -1,0 +1,59 @@
+[2026-11-04 11:33:58,517: INFO/MainProcess] [ExecutorFactory] HEAL_TARGET_PROFILE=ecom → ecom-payment/ecom-payment (app=ecom-payment,role=api)
+[2026-11-04 11:33:58,518: INFO/MainProcess] [K8sExecutor] Loaded custom kubeconfig from /Users/jagdish/Projects/SMART_DAHS/smart-autoheal/.kube/ecom-staging-tunnel.kubeconfig
+[2026-11-04 11:33:58,519: INFO/MainProcess] [K8sExecutor] Successfully connected to Kubernetes API (Cluster: minikube)
+[2026-11-04 11:33:58,548: INFO/MainProcess] [DB] Incident database initialized at postgresql://smart:smartpass@localhost:5432/smartdb
+[2026-11-04 11:33:58,550: INFO/MainProcess] [Activity] Delivery enabled: persistence+redis
+ 
+ -------------- smart-heal@JAGDISHs-MacBook-Air.local v5.6.3 (recovery)
+--- ***** ----- 
+-- ******* ---- macOS-26.6.2-arm64-arm-64bit-Mach-O 2026-11-04 11:33:58
+- *** --- * --- 
+- ** ---------- [config]
+- ** ---------- .> app:         smart_healing_tasks:0x10d9f30e0
+- ** ---------- .> transport:   redis://localhost:6379/0
+- ** ---------- .> results:     disabled://
+- *** --- * --- .> concurrency: 1 (solo)
+-- ******* ---- .> task events: OFF (enable -E to monitor tasks in this worker)
+--- ***** ----- 
+ -------------- [queues]
+                .> celery           exchange=celery(direct) key=celery
+                
+
+[tasks]
+  . execute_healing_task
+
+[2026-11-04 11:33:58,589: INFO/MainProcess] Connected to redis://localhost:6379/0
+[2026-11-04 11:33:58,591: INFO/MainProcess] mingle: searching for neighbors
+[2026-11-04 11:33:59,600: INFO/MainProcess] mingle: all alone
+[2026-11-04 11:33:59,627: INFO/MainProcess] smart-heal@JAGDISHs-MacBook-Air.local ready.
+[2026-11-04 11:40:17,704: INFO/MainProcess] Task execute_healing_task[fb6c5d5d-e9a0-472a-88b9-295583e485df] received
+[2026-11-04 11:40:17,705: INFO/MainProcess] [Security] AUTH_SUCCESS verify request_id=5add3357-5eda-469c-be25-2cafc816e6fa sender=orchestrator action=restart_deployment
+[2026-11-04 11:40:17,708: INFO/MainProcess] [Security] REPLAY_ACCEPTED request_id=5add3357-5eda-469c-be25-2cafc816e6fa sender=orchestrator action=restart_deployment age_seconds=0.126 ttl_seconds=299
+[2026-11-04 11:40:17,708: INFO/MainProcess] [Security] AUTHORIZATION_ALLOWED request_id=5add3357-5eda-469c-be25-2cafc816e6fa sender=orchestrator action=restart_deployment namespace=ecom-payment resource=deployment/ecom-payment policy=POL001 version=1
+[2026-11-04 11:40:17,728: INFO/MainProcess] [Security] SECURITY_DECISION_PERSISTED decision_id=8c8bcf90-c214-4063-b35c-fc926f8ada1c request_id=5add3357-5eda-469c-be25-2cafc816e6fa allowed=True final_reason=allowed row_id=172
+[2026-11-04 11:40:17,742: INFO/MainProcess] [Security] ZERO_TRUST_ALLOW request_id=5add3357-5eda-469c-be25-2cafc816e6fa sender=orchestrator action=restart_deployment policy=POL001
+[2026-11-04 11:40:17,742: INFO/MainProcess] [Celery Worker] ZERO_TRUST_ALLOW healing task request_id=5add3357-5eda-469c-be25-2cafc816e6fa action=restart_deployment sender=orchestrator policy=POL001 decision_id=8c8bcf90-c214-4063-b35c-fc926f8ada1c
+[2026-11-04 11:40:17,748: WARNING/MainProcess] [Healer] ⚡ Executing action: restart_deployment
+[2026-11-04 11:40:17,748: WARNING/MainProcess] [Healer] 🔄 HEALING: Rolling restart of workload
+[2026-11-04 11:40:17,829: INFO/MainProcess] [K8sExecutor] ✅ restart_deployment success (81ms)
+[2026-11-04 11:40:26,985: INFO/MainProcess] [Healer] ✅ Healing action 'restart_deployment' completed successfully in 81ms
+[2026-11-04 11:40:27,044: INFO/MainProcess] [DB] Incident #172 logged: issue=Pod Crash / Instability | learning_issue_type=Pod Crash / Instability | action=restart_deployment | result=success
+[2026-11-04 11:40:27,117: INFO/MainProcess] [Audit] Appended block #172 event=incident_audited prev=2661869f… hash=80629b40…
+[2026-11-04 11:40:27,117: INFO/MainProcess] [Audit] Incident #172 audited as block #172 (hash=80629b40…)
+[2026-11-04 11:40:28,464: INFO/MainProcess] [LLM] Generation successful! Latency: 1313ms
+[2026-11-04 11:40:28,464: CRITICAL/MainProcess] 
+=======================================================
+🔴 *KubeHeal AI | Incident Report*
+🕐 Time: `2026-11-04 06:10:27 UTC`
+---
+Critical Pod Instability detected. Root Cause: Crash-looping pods. Action: Restart Deployment. Metrics: CPU 0.0%, Memory 2.45%, 2 Restarts, Healthy: False.
+---
+🛡️ _KubeHeal AI | Automated DevOps Monitoring_
+=======================================================
+[2026-11-04 11:40:32,912: INFO/MainProcess] [Alerter] ✅ Email alert sent successfully
+[2026-11-04 11:40:32,926: INFO/MainProcess] [Celery Worker] ✅ Async healing cycle complete — incident #172 logged (total=28805ms)
+[2026-11-04 11:40:32,933: INFO/MainProcess] Task execute_healing_task[fb6c5d5d-e9a0-472a-88b9-295583e485df] succeeded in 15.228695291999884s: 172
+
+worker: Hitting Ctrl+C again will initiate cold shutdown, terminating all running tasks!
+
+worker: Warm shutdown (MainProcess)
